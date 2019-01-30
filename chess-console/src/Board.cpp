@@ -1,8 +1,7 @@
 #include "Board.h"
 
 Board::Board() {
-	positionPieces(0);
-	positionPieces(1);
+	positionPieces();
 	for (int i = 2; i < CELL_COUNT - 2; i++) {
 		for (int j = 0; j < CELL_COUNT; j = j + 2) {
 			if (i % 2 == 0) {
@@ -16,28 +15,37 @@ Board::Board() {
 		}
 	}
 }
+
 void Board::drawBoard(){
-	int n = 8, m = 8;
+	int n = 8;
 	std::cout << "    ";
-	for (int i = 0; i < CELL_COUNT; i++) {
-		std::cout << (char)(i + 65) << " ";
-	}
 	std::cout << "\n";
 	for (int i = 0; i < CELL_COUNT; i++) {
 		std::cout << n-- << " | ";
 		for (int j = 0; j < CELL_COUNT; j++) {
 			std::cout << m_Cell[i][j] << " ";
 		}
-		std::cout << "| " << m--;
+		std::cout << "| ";
 		std::cout << "\n";
 	}
 	std::cout << "    ";
 	for (int i = 0; i < CELL_COUNT; i++) {
 		std::cout << (char)(i + 65) << " ";
 	}
+	std::cout << "\n";
 }
 
-void Board::positionPieces(bool isWhite) {
+void Board::move(const std::string& notation) {
+	int old_x = notation.at(0) - 97;
+	int old_y = 8 - notation.at(1) + 48;
+	int new_x = notation.at(3) - 97;
+	int new_y = 8 - notation.at(4) + 48;
+	m_Cell[new_y][new_x] = m_Cell[old_y][old_x];
+	m_Cell[old_y][old_x] = (old_y % 2 == 1 && old_x % 2 == 0) || (old_y % 2 == 0 && old_x % 2 == 1) ? '+' : '*';
+	drawBoard();
+}
+
+void Board::positionPieces() {
 	//Positioning White pieces
 	m_Cell[7][0] = Board::rook;
 	m_Cell[7][1] = Board::knight;
