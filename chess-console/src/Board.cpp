@@ -36,13 +36,31 @@ void Board::drawBoard(){
 }
 
 void Board::move(const std::string& notation) {
-	int old_x = notation.at(0) - 97;
-	int old_y = 8 - notation.at(1) + 48;
-	int new_x = notation.at(3) - 97;
-	int new_y = 8 - notation.at(4) + 48;
-	m_Cell[new_y][new_x] = m_Cell[old_y][old_x];
-	m_Cell[old_y][old_x] = (old_y % 2 == 1 && old_x % 2 == 0) || (old_y % 2 == 0 && old_x % 2 == 1) ? '+' : '*';
-	drawBoard();
+	if (isMovable(notation)) {
+		int old_x = notation.at(1) - 97;
+		int old_y = 8 - notation.at(2) + 48;
+		int new_x = notation.at(4) - 97;
+		int new_y = 8 - notation.at(5) + 48;
+		m_Cell[new_y][new_x] = m_Cell[old_y][old_x];
+		m_Cell[old_y][old_x] = (old_y % 2 == 1 && old_x % 2 == 0) || (old_y % 2 == 0 && old_x % 2 == 1) ? '+' : '*';
+		drawBoard();
+	}
+}
+
+
+bool Board::isMovable(const std::string& move) {
+	if ((m_Cell[8 - move.at(2) + 48][move.at(1) - 97] == 'P' || m_Cell[8 - move.at(2) + 48][move.at(1) - 97] == 'p') && (move.at(0) == 'p' || move.at(0) == 'P')) {
+		if (move.at(1) == move.at(4)) {
+			if (move.at(5) - move.at(2) < 2 && move.at(5) - move.at(2) > -1) {
+				return 1;
+			}
+			else if(move.at(5) - move.at(2) == 2 && move.at(2) == '2') {
+				return 1;
+			}
+		}
+	}
+	std::cout << "impossible move\n";
+	return 0;
 }
 
 void Board::positionPieces() {

@@ -17,4 +17,5 @@ public:
 	void drawBoard();
 	void positionPieces();
 	void move(const std::string& notation);
+	bool isMovable(const std::string&);
 };
