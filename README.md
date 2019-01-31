@@ -1,2 +1,2 @@
-# chess-console
-Console based chess game developed as a personal project to learn C++
+# Simple chess application using console
+A personal project which purpose is to get used to c++ and acquire new knowledge and proffieciency.
