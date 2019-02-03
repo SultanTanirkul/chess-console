@@ -18,4 +18,6 @@ public:
 	void positionPieces();
 	void move(const std::string& notation);
 	bool isMovable(const std::string&);
+	int toArrRow(const std::string&);
+	int toArrCol(const std::string&);
 };

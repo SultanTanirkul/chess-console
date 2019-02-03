@@ -59,6 +59,13 @@ bool Board::isMovable(const std::string& move) {
 			}
 		}
 	}
+	else if ((m_Cell[8 - move.at(2) + 48][move.at(1) - 97] == 'B' || m_Cell[8 - move.at(2) + 48][move.at(1) - 97] == 'b') && (move.at(0) == 'b' || move.at(0) == 'B')) {
+		std::cout << abs(8 - move.at(2) + 48 - (8 - move.at(5) + 48)) <<std::endl;
+		std::cout << abs(move.at(1) - 97 - (move.at(4) - 97)) << std::endl;
+		if (abs(8 - move.at(2) + 48 - (8-move.at(5) + 48)) == abs(move.at(1) - 97 - (move.at(4) - 97))) {
+			return 1;
+		}
+	}
 	std::cout << "impossible move\n";
 	return 0;
 }
