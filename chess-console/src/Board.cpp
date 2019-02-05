@@ -67,10 +67,15 @@ bool Board::isMovable(const std::string& move) {
 		}
 	}
 	else if ((m_Cell[8 - move.at(2) + 48][move.at(1) - 97] == 'N' || m_Cell[8 - move.at(2) + 48][move.at(1) - 97] == 'n') && (move.at(0) == 'N' || move.at(0) == 'n')) {
-		std::cout << abs(8 - move.at(2) + 48 - (8 - move.at(5) + 48)) << std::endl;
-		std::cout << abs(move.at(1) - 97 - (move.at(4) - 97)) << std::endl;
 		if ((abs(8 - move.at(2) + 48 - (8 - move.at(5) + 48)) == 1 || abs(8 - move.at(2) + 48 - (8 - move.at(5) + 48)) == 2)
 			&& (abs(move.at(1) - 97 - (move.at(4) - 97)) == 1 || abs(move.at(1) - 97 - (move.at(4) - 97)) == 2)) {
+			return 1;
+		}
+	}
+	else if ((m_Cell[8 - move.at(2) + 48][move.at(1) - 97] == 'R' || m_Cell[8 - move.at(2) + 48][move.at(1) - 97] == 'r') && (move.at(0) == 'R' || move.at(0) == 'r')) {
+		std::cout << abs(8 - move.at(2) + 48 - (8 - move.at(5) + 48)) << std::endl;
+		std::cout << abs(move.at(1) - 97 - (move.at(4) - 97)) << std::endl;
+		if (abs(move.at(2) - move.at(5)) == 0 || abs(move.at(1) - move.at(4)) == 0) {
 			return 1;
 		}
 	}
